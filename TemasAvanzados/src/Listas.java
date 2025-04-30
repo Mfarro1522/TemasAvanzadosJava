@@ -45,6 +45,8 @@ public class Listas {
             System.out.println("Lambda : "+elemento);
         });
 
+        System.out.println("PRUEBA");
+
 
 
     }
