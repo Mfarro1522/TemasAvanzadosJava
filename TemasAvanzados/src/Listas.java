@@ -35,9 +35,16 @@ public class Listas {
         miLista2.add("Domingo");
         //miLista2.add(1); //no otros datos
 
-        for (String e : miLista2){
-            System.out.println(e );
-        }
+        //for (String e : miLista2){
+        //    System.out.println(e );
+       // }
+
+        //funciones lambda (funcion anonima de un codigo muy compacto)
+        //se llama programacion funcional
+        miLista2.forEach(elemento -> {
+            System.out.println("Lambda : "+elemento);
+        });
+
 
 
     }
