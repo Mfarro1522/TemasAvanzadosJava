@@ -26,5 +26,6 @@ public class Mapa {
         //para praticar lambda se puede simplificar mas
         Persona.forEach((llave , valor) ->  System.out.println("Llave "+llave+" valor "+valor));
 
+
     }
 }
