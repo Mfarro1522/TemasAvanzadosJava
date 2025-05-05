@@ -46,7 +46,7 @@ public class Snack implements Serializable {
     @Override
     public String toString() {
         return "Snack{" +
-                "cantidad=" + idSnack +
+                "ID=" + idSnack +
                 ", nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 '}';
