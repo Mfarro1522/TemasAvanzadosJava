@@ -2,5 +2,5 @@ primeras
 lineas
 del
 archivo
-nuevo
-contenido
+Nuevo
+Contenido
