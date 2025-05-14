@@ -1,0 +1,6 @@
+1,Papa,3.0
+2,Jugo,4.0
+3,Kekin,2.0
+4,chocolate,3.0
+5,nachos,5.0
+6,Sanguche,2.0
