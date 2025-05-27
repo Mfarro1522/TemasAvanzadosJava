@@ -28,6 +28,7 @@ public class MCD_MCM {
                 a /= i;
             }
         }
+        return 0;
 
     }
 
