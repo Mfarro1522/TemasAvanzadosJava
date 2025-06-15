@@ -1,41 +1,70 @@
 package PracticaDamas;
 
 public class Fichas {
-    private char tipo; // 'B' para blancas, 'N' para negras, 'R' para reina blanca, 'Q' para reina negra
+    // Atributos
+    private String color;
+    private int fila;
+    private int columna;
     private boolean esReina;
     
-    public Fichas(char tipo) {
-        this.tipo = tipo;
-        this.esReina = (tipo == 'R' || tipo == 'Q');
+    // Constructor por defecto
+    public Fichas() {
+        this.color = "";
+        this.fila = 0;
+        this.columna = 0;
+        this.esReina = false;
     }
     
-    public char getTipo() {
-        return tipo;
+    // Constructor con parámetros
+    public Fichas(String color, int fila, int columna) {
+        this.color = color;
+        this.fila = fila;
+        this.columna = columna;
+        this.esReina = false;
     }
     
-    public boolean esReina() {
+    // Getters
+    public String getColor() {
+        return color;
+    }
+    
+    public int getFila() {
+        return fila;
+    }
+    
+    public int getColumna() {
+        return columna;
+    }
+    
+    public boolean isEsReina() {
         return esReina;
     }
     
-    public void convertirAReina() {
-        if (tipo == 'B') {
-            tipo = 'R'; // Reina blanca
-        } else if (tipo == 'N') {
-            tipo = 'Q'; // Reina negra
-        }
-        esReina = true;
+    // Setters
+    public void setColor(String color) {
+        this.color = color;
     }
     
-    public boolean esBlanca() {
-        return tipo == 'B' || tipo == 'R';
+    public void setFila(int fila) {
+        this.fila = fila;
     }
     
-    public boolean esNegra() {
-        return tipo == 'N' || tipo == 'Q';
+    public void setColumna(int columna) {
+        this.columna = columna;
     }
     
+    public void setEsReina(boolean esReina) {
+        this.esReina = esReina;
+    }
+    
+    // toString
     @Override
     public String toString() {
-        return String.valueOf(tipo);
+        return "Ficha{" +
+                "color='" + color + '\'' +
+                ", fila=" + fila +
+                ", columna=" + columna +
+                ", esReina=" + esReina +
+                '}';
     }
 }

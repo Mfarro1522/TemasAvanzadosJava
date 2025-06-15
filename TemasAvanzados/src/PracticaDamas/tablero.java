@@ -1,51 +1,192 @@
 package PracticaDamas;
 
 public class tablero {
-    private Fichas[][] tablero;
-    private final int TAMAÑO = 8;
+    // Atributos del tablero
+    private int tamaño;
+    private String[][] tablero;
     
+    // Arrays paralelos para fichas 
+    private Fichas[] fichasBlancas;
+    private String[] posicionesBlancas; 
+    
+
+    private Fichas[] fichasNegras;
+    private String[] posicionesNegras; 
+    
+    // Constructor
     public tablero() {
-        tablero = new Fichas[TAMAÑO][TAMAÑO];
+        this.tamaño = 8;
+        this.tablero = new String[tamaño][tamaño];
+        
+        this.fichasBlancas = new Fichas[12];
+        this.posicionesBlancas = new String[12];
+        this.fichasNegras = new Fichas[12];
+        this.posicionesNegras = new String[12];
+        
         inicializarTablero();
+        colocarFichasIniciales();
     }
     
+    public tablero(int tamaño) {
+        this.tamaño = tamaño;
+        this.tablero = new String[tamaño][tamaño];
+        
+        this.fichasBlancas = new Fichas[12];
+        this.posicionesBlancas = new String[12];
+        this.fichasNegras = new Fichas[12];
+        this.posicionesNegras = new String[12];
+        
+        inicializarTablero();
+        colocarFichasIniciales();
+    }
+    
+
     private void inicializarTablero() {
-        // Colocar fichas negras en las primeras 3 filas
-        for (int fila = 0; fila < 3; fila++) {
-            for (int col = 0; col < TAMAÑO; col++) {
-                if ((fila + col) % 2 == 1) { // Solo en casillas negras
-                    tablero[fila][col] = new Fichas('N');
+        for (int i = 0; i < tamaño; i++) {
+            for (int j = 0; j < tamaño; j++) {
+
+                if ((i + j) % 2 == 0) {
+                    tablero[i][j] = "[ ]"; // Casilla blanca
+                } else {
+                    tablero[i][j] = "[ ]"; // Casilla negra 
+                }
+            }
+        }
+    }
+    
+    // colocar fichas
+    private void colocarFichasIniciales() {
+        int indiceBlancos = 0;
+        int indiceNegros = 0;
+        
+        // Colocar fichas negras 
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < tamaño; j++) {
+                if ((i + j) % 2 == 1) { //casillas negras
+                    fichasNegras[indiceNegros] = new Fichas("NEGRO", i, j);
+                    posicionesNegras[indiceNegros] = i + "," + j;
+                    tablero[i][j] = "[N]";
+                    indiceNegros++;
                 }
             }
         }
         
-        // Colocar fichas blancas en las últimas 3 filas
-        for (int fila = 5; fila < TAMAÑO; fila++) {
-            for (int col = 0; col < TAMAÑO; col++) {
-                if ((fila + col) % 2 == 1) { // Solo en casillas negras
-                    tablero[fila][col] = new Fichas('B');
+        // Colocar fichas blancas 
+        for (int i = tamaño - 3; i < tamaño; i++) {
+            for (int j = 0; j < tamaño; j++) {
+                if ((i + j) % 2 == 1) { 
+                    fichasBlancas[indiceBlancos] = new Fichas("BLANCO", i, j);
+                    posicionesBlancas[indiceBlancos] = i + "," + j;
+                    tablero[i][j] = "[B]";
+                    indiceBlancos++;
                 }
             }
         }
     }
     
-    public void mostrarTablero() {
-        System.out.println("  0 1 2 3 4 5 6 7");
-        for (int fila = 0; fila < TAMAÑO; fila++) {
-            System.out.print(fila + " ");
-            for (int col = 0; col < TAMAÑO; col++) {
-                if (tablero[fila][col] != null) {
-                    System.out.print(tablero[fila][col] + " ");
-                } else if ((fila + col) % 2 == 0) {
-                    System.out.print("□ "); // Casilla blanca vacía
-                } else {
-                    System.out.print("■ "); // Casilla negra vacía
-                }
+    
+    public void dibujar() {
+        System.out.println("=== TABLERO DE DAMAS ===");
+        System.out.println();
+        
+       
+        System.out.print("   ");
+        for (int j = 0; j < tamaño; j++) {
+            System.out.print(" " + j + " ");
+        }
+        System.out.println();
+        
+        
+        for (int i = 0; i < tamaño; i++) {
+            System.out.print(i + "  ");
+            for (int j = 0; j < tamaño; j++) {
+                System.out.print(tablero[i][j]);
             }
             System.out.println();
         }
         System.out.println();
+        
+        
+        mostrarInformacionFichas();
     }
-
-
+    
+    
+    private void mostrarInformacionFichas() {
+        System.out.println("=== FICHAS BLANCAS ===");
+        for (int i = 0; i < fichasBlancas.length; i++) {
+            if (fichasBlancas[i] != null) {
+                System.out.println("Ficha " + (i + 1) + ": " + fichasBlancas[i] + 
+                                 " - Posición: " + posicionesBlancas[i]);
+            }
+        }
+        
+        System.out.println();
+        System.out.println("=== FICHAS NEGRAS ===");
+        for (int i = 0; i < fichasNegras.length; i++) {
+            if (fichasNegras[i] != null) {
+                System.out.println("Ficha " + (i + 1) + ": " + fichasNegras[i] + 
+                                 " - Posición: " + posicionesNegras[i]);
+            }
+        }
+    }
+    
+    // Getters
+    public int getTamaño() {
+        return tamaño;
+    }
+    
+    public String[][] getTablero() {
+        return tablero;
+    }
+    
+    public Fichas[] getFichasBlancas() {
+        return fichasBlancas;
+    }
+    
+    public String[] getPosicionesBlancas() {
+        return posicionesBlancas;
+    }
+    
+    public Fichas[] getFichasNegras() {
+        return fichasNegras;
+    }
+    
+    public String[] getPosicionesNegras() {
+        return posicionesNegras;
+    }
+    
+    // Setters
+    public void setTamaño(int tamaño) {
+        this.tamaño = tamaño;
+    }
+    
+    public void setTablero(String[][] tablero) {
+        this.tablero = tablero;
+    }
+    
+    public void setFichasBlancas(Fichas[] fichasBlancas) {
+        this.fichasBlancas = fichasBlancas;
+    }
+    
+    public void setPosicionesBlancas(String[] posicionesBlancas) {
+        this.posicionesBlancas = posicionesBlancas;
+    }
+    
+    public void setFichasNegras(Fichas[] fichasNegras) {
+        this.fichasNegras = fichasNegras;
+    }
+    
+    public void setPosicionesNegras(String[] posicionesNegras) {
+        this.posicionesNegras = posicionesNegras;
+    }
+    
+    // toString
+    @Override
+    public String toString() {
+        return "Tablero{" +
+                "tamaño=" + tamaño +
+                ", fichas blancas=" + fichasBlancas.length +
+                ", fichas negras=" + fichasNegras.length +
+                '}';
+    }
 }
